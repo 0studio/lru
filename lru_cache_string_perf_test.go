@@ -26,3 +26,16 @@ func BenchmarkGet(b *testing.B) {
 		_ = val
 	}
 }
+
+func BenchmarkMapGet(b *testing.B) {
+	cache := make(map[string]MyValue)
+	value := make(MyValue, 1000)
+	cache["stuff"] = value
+	for i := 0; i < b.N; i++ {
+		val, ok := cache["stuff"]
+		if !ok {
+			panic("error")
+		}
+		_ = val
+	}
+}
